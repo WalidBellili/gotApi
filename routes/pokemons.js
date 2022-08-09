@@ -11,11 +11,16 @@ app.get("/api", async (req, res) => {
 });
 
 app.get("/api/:id", async (req, res) => {
-  const response = await axios.get(
-    `https://pokeapi.co/api/v2/pokemon/${req.params.id}`
-  );
+  try {
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${req.params.id}`
+    );
 
-  res.send(response.data);
+    res.send(response.data);
+  } catch (error) {
+    console.log(error);
+    res.status(error.response.status).send(error.response.data);
+  }
 });
 
 module.exports = app;
