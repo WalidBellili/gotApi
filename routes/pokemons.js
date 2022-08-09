@@ -10,4 +10,12 @@ app.get("/api", async (req, res) => {
   res.send(response.data);
 });
 
+app.get("/api/:id", async (req, res) => {
+  const response = await axios.get(
+    `https://pokeapi.co/api/v2/pokemon/${req.params.id}`
+  );
+
+  res.send(response.data);
+});
+
 module.exports = app;
